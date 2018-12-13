@@ -1,10 +1,12 @@
 package com.tareas.core.externalServices;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.JSONObject;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,7 +18,9 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
@@ -35,7 +39,7 @@ public class UsuariosExternosImpl implements UsuariosExternos{
 	
 	// OBTIENE TODOS LOS USUARIOS DE LA API EXTERNA
 	@Override
-	public List<Object> findAll() {
+	public List<Usuarios> findAll() {
 		
 		String obtenido = "";
 		obtenido = obtenerToken().toString();
@@ -56,9 +60,26 @@ public class UsuariosExternosImpl implements UsuariosExternos{
 	    
 	    HttpEntity<String> entity = new HttpEntity<String>(headers);
 	    
-	    ResponseEntity<List<Object>> response = restTemplate.exchange(url, HttpMethod.GET, entity, new ParameterizedTypeReference<List<Object>>() {});
+	    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 	    
-	    List<Object> lista = response.getBody();
+	    logger.info(response.getBody());;
+	    
+	    List<Usuarios> lista = null;
+	    
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    
+	    try {
+			lista = objectMapper.readValue(response.getBody().toString(), new TypeReference<List<Usuarios>>(){});
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    
 	    return lista;
 	}
@@ -85,18 +106,19 @@ public class UsuariosExternosImpl implements UsuariosExternos{
 	    
 	    HttpEntity<String> entity = new HttpEntity<String>(headers);
 	    
-	    ResponseEntity<Object> response = restTemplate.exchange(url + "/" + id, HttpMethod.GET, entity, Object.class);
-	    
-	    Object user = response.getBody();
+	    ResponseEntity<String> response = restTemplate.exchange(url + "/" + id, HttpMethod.GET, entity, String.class);
 	    
 	    try {
-		    Gson gson= new Gson();
-		    
-		    Usuarios obj= gson.fromJson(response.getBody().toString(),Usuarios.class);
-		    
-		    return obj;
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			Usuarios usuarioObtenido = objectMapper.readValue(response.getBody(), Usuarios.class);
+			
+		    return usuarioObtenido;
 	    }
 	    catch(Exception e) {
+	    	
+	    	logger.info(e.getMessage());;
+	    	
 	    	return null;
 	    }
 	}

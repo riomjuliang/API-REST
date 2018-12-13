@@ -46,34 +46,34 @@ public class UsuariosController {
 	
 	// OBTIENE TODOS LOS USUARIOS DE LA API EXTERNA 
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<List<Object>> findAll() {
+	public @ResponseBody ResponseEntity<List<Usuarios>> findAll() {
 		try {
-			List<Object> arr = servicio.findAll();
+			List<Usuarios> arr = servicio.findAll();
 			
 			if(arr.isEmpty()) {
-				return new ResponseEntity<List<Object>>(HttpStatus.NO_CONTENT);
+				return new ResponseEntity<List<Usuarios>>(HttpStatus.NO_CONTENT);
 			}
 		
-			return new ResponseEntity<List<Object>>(arr, HttpStatus.OK);
+			return new ResponseEntity<List<Usuarios>>(arr, HttpStatus.OK);
 		}
 		catch(Exception e) {
-			return new ResponseEntity<List<Object>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<Usuarios>>(HttpStatus.NO_CONTENT);
 		}		
 	}	
 	
 	// OBTIENE UN USUARIO POR SU ID EN LA API EXTERNA
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<Object> getById(@PathVariable("id") int id) {		
+	public @ResponseBody ResponseEntity<Usuarios> getById(@PathVariable("id") int id) {		
 		try {
-			Object user = servicio.getById(id);	
+			Usuarios user = servicio.getById(id);
 			
 			return user != null 
-					? new ResponseEntity<Object>(user, HttpStatus.OK)
-					: new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+					? new ResponseEntity<Usuarios>(user, HttpStatus.OK)
+					: new ResponseEntity<Usuarios>(HttpStatus.NO_CONTENT);
 				
 			}
 			catch(Exception e) {
-				return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+				return new ResponseEntity<Usuarios>(HttpStatus.NO_CONTENT);
 			}	
 	}
 	

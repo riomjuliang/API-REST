@@ -9,9 +9,9 @@ import com.tareas.core.entity.Token;
 import com.tareas.core.entity.Usuarios;
 
 public interface UsuariosExternos {
-	List<Object> findAll();
+	List<Usuarios> findAll();
 	
-	Object getById(int id);
+	Usuarios getById(int id);
 	
 	Object obtenerToken();
 }
