@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -85,6 +86,7 @@ public class UsuariosExternosImpl implements UsuariosExternos{
 	}
 
 	@Override
+	@Cacheable(value = "usersCache", key="#id")
 	public Usuarios getById(int id) {
 		
 		String obtenido = "";

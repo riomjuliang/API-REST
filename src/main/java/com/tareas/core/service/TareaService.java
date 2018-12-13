@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class TareaService {
 	private Convertidor convertidor;
 	
 	private static final Log logger = LogFactory.getLog(TareaService.class);
-
+	
 	public boolean Crear(Tareas tarea) {
 		logger.info("CREANDO TAREA");
 		try {
