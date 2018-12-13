@@ -1,5 +1,6 @@
 package com.tareas.core.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -31,6 +32,8 @@ public class TareaService {
 	public boolean Crear(Tareas tarea) {
 		logger.info("CREANDO TAREA");
 		try {
+			tarea.setFecha_creacion(new Date());
+			
 			repositorio.save(tarea);
 			
 			logger.info("TAREA CREADA SATISFACTORIAMENTE.");

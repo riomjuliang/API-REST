@@ -1,7 +1,7 @@
 package com.tareas.core.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,8 +65,8 @@ public class Tareas implements Serializable{
 	public Date getFecha_creacion() {
 		return fecha_creacion;
 	}
-	public void setFecha_creacion(Date fecha_creacion) {
-		this.fecha_creacion = fecha_creacion;
+	public void setFecha_creacion(Date date) {
+		this.fecha_creacion = date;
 	}
 	
 	
