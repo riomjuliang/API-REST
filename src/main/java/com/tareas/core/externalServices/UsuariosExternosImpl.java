@@ -113,7 +113,7 @@ public class UsuariosExternosImpl implements UsuariosExternos{
 			ObjectMapper objectMapper = new ObjectMapper();
 			Usuarios usuarioObtenido = objectMapper.readValue(response.getBody(), Usuarios.class);
 			
-		    return usuarioObtenido;
+		    return usuarioObtenido != null ? usuarioObtenido : null;
 	    }
 	    catch(Exception e) {
 	    	
@@ -154,5 +154,4 @@ public class UsuariosExternosImpl implements UsuariosExternos{
 	   
     	return response.getBody();
 	}
-	
 }

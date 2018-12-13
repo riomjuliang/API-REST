@@ -36,7 +36,7 @@ public class UsuariosController {
 			
 			Gson g = new Gson(); 
 			Token t = g.fromJson(obtenido, Token.class);
-		
+			
 			return new ResponseEntity<Object>(t, HttpStatus.OK);
 		}
 		catch(Exception e) {
