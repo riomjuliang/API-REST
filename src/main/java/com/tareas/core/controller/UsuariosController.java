@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import com.tareas.core.externalServices.UsuariosExternos;
 
 @Controller
 @RequestMapping("/v1")
+@EnableCaching
 public class UsuariosController {
 	
 	@Autowired
@@ -49,11 +51,10 @@ public class UsuariosController {
 	public @ResponseBody ResponseEntity<List<Usuarios>> findAll() {
 		try {
 			List<Usuarios> arr = servicio.findAll();
-			
 			if(arr.isEmpty()) {
 				return new ResponseEntity<List<Usuarios>>(HttpStatus.NO_CONTENT);
 			}
-		
+			
 			return new ResponseEntity<List<Usuarios>>(arr, HttpStatus.OK);
 		}
 		catch(Exception e) {
@@ -76,5 +77,4 @@ public class UsuariosController {
 				return new ResponseEntity<Usuarios>(HttpStatus.NO_CONTENT);
 			}	
 	}
-	
 }

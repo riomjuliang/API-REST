@@ -1,5 +1,4 @@
 package com.tareas.core;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.CacheManager;
@@ -17,6 +16,6 @@ public class ApiRestApplication {
 	
 	@Bean
 	public CacheManager cacherManager() {
-		return new ConcurrentMapCacheManager("usersCache");
+		return new ConcurrentMapCacheManager("usersCache", "taskCache");
 	}
 }

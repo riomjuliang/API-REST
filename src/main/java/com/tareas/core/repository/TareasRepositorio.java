@@ -1,6 +1,7 @@
 package com.tareas.core.repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -19,5 +20,6 @@ public interface TareasRepositorio extends JpaRepository<Tareas, Serializable>, 
 	public abstract List<Tareas> findAll();
 	
 	public abstract Page<Tareas> findAll(Pageable pageable);
+
 	
 }	

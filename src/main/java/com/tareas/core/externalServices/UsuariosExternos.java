@@ -3,6 +3,7 @@ package com.tareas.core.externalServices;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.springframework.stereotype.Repository;
 
 import com.google.gson.JsonArray;
 import com.tareas.core.entity.Token;
