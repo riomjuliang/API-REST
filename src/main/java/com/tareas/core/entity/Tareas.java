@@ -1,12 +1,17 @@
 package com.tareas.core.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name="TAREAS")
@@ -29,15 +34,30 @@ public class Tareas implements Serializable{
 	@Column(name="FECHA_CREACION")
 	private Date fecha_creacion;
 	
-	public Tareas() {}
+	@Column(name="USUARIOS")
+	private ArrayList<Integer> usuarios = new ArrayList<Integer>();
+
 	
-	public Tareas(int idTarea, String descripcion, String nombre, int idUsuario, Date fecha_creacion) {
+	public Tareas() {}
+
+	public Tareas(int idTarea, String descripcion, String nombre, int idUsuario, Date fecha_creacion,
+			ArrayList<Integer> usuarios) {
+		super();
 		this.idTarea = idTarea;
 		this.descripcion = descripcion;
 		this.nombre = nombre;
 		this.idUsuario = idUsuario;
 		this.fecha_creacion = fecha_creacion;
+		this.usuarios = usuarios;
 	}
+	
+
+	@Override
+	public String toString() {
+		return "Tareas [idTarea=" + idTarea + ", descripcion=" + descripcion + ", nombre=" + nombre + ", idUsuario="
+				+ idUsuario + ", fecha_creacion=" + fecha_creacion + ", usuarios=" + usuarios + "]";
+	}
+
 	public int getIdTarea() {
 		return idTarea;
 	}
@@ -65,9 +85,18 @@ public class Tareas implements Serializable{
 	public Date getFecha_creacion() {
 		return fecha_creacion;
 	}
-	public void setFecha_creacion(Date fecha_creacion) {
-		this.fecha_creacion = fecha_creacion;
+	public void setFecha_creacion(Date date) {
+		this.fecha_creacion = date;
 	}
+
+	public ArrayList<Integer> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(ArrayList<Integer> usuarios) {
+		this.usuarios = usuarios;
+	}
+
 	
 	
 }

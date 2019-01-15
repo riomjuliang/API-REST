@@ -3,15 +3,16 @@ package com.tareas.core.externalServices;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.springframework.stereotype.Repository;
 
 import com.google.gson.JsonArray;
 import com.tareas.core.entity.Token;
 import com.tareas.core.entity.Usuarios;
 
 public interface UsuariosExternos {
-	List<Object> findAll();
+	List<Usuarios> findAll();
 	
-	Object getById(int id);
+	Usuarios getById(int id);
 	
 	Object obtenerToken();
 }
